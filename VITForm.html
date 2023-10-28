@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIT Event Registration</title>
+	<link href="register.css" rel="stylesheet">
+</head>
+<body>
+<div class="top-bar">
+        <h1>VIT - Vellore Institute of Technology</h1>
+    </div>
+    <div class="container">
+        <h2>VIT Event Registration</h2>
+        <form id="registrationForm">
+            <div class="form">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+			
+			<div class="form">
+                <label for="reg.no">Register Number:</label>
+                <input type="text" id="reg.no" name="Register Number" required>
+            </div>
+
+            <div class="form">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <p class="error" id="emailError"></p>
+            </div>
+
+            <div class="form">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <p class="error" id="passwordError"></p>
+            </div>
+
+            <div class="form">
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" id="mobile" name="mobile" required>
+                <p class="error" id="mobileError"></p>
+            </div>
+
+            <div class="form">
+                <label for="zipcode">Zip Code:</label>
+                <input type="text" id="zipcode" name="zipcode" required>
+				<p class="error" id="zipcodeError"></p>
+            </div>
+
+            <input type="submit" value="Register">
+        </form>
+    </div>
+
+    <script>
+        const registrationForm = document.getElementById("registrationForm");
+
+        registrationForm.addEventListener("submit", function (e) {
+            let isValid = true;
+
+            // Email Validation
+            const email = document.getElementById("email");
+            const emailError = document.getElementById("emailError");
+            const emailPattern =/^(.+)\.([a-zA-Z]+)\d{4}@vitstudent\.ac\.in$/;
+
+            if (!emailPattern.test(email.value)) {
+                emailError.textContent = "! Email must be a VIT email address.";
+                isValid = false;
+            } else {
+                emailError.textContent = "";
+            }
+
+            // Password Validation
+		   const password = document.getElementById("password");
+		   const passwordError = document.getElementById("passwordError");
+		   const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[~!@#\$%^*-_+=\[\]{}\/;:,.?]).{10,100}$/;
+		   
+		   if (!passwordPattern.test(password.value)) {
+                passwordError.textContent = "! Password does not meet the requirements.";
+                isValid = false;
+            } else {
+                passwordError.textContent = "";
+            }
+
+
+            // Mobile Validation
+            const mobile = document.getElementById("mobile");
+            const mobileError = document.getElementById("mobileError");
+            const mobilePattern = /^[0-9]{10}$/;
+            if (!mobilePattern.test(mobile.value)) {
+                mobileError.textContent = "! Mobile number should be 10 digits.";
+                isValid = false;
+            } else {
+                mobileError.textContent = "";
+            }
+
+            if (!isValid) {
+                e.preventDefault();
+            }
+			
+			// Zip Code Validation
+            const zipcode = document.getElementById("zipcode");
+            const zipcodeError = document.getElementById("zipcodeError");
+            const zipcodePattern = /^\d{5}$/;
+            if (!zipcodePattern.test(zipcode.value)) {
+                zipcodeError.textContent = "! Zip Code must be exactly five digits.";
+                isValid = false;
+            } else {
+                zipcodeError.textContent = "";
+            }
+
+            if (!isValid) {
+                e.preventDefault();
+            }
+
+        });
+    </script>
+</body>
+</html>
